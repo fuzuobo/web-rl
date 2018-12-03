@@ -2,7 +2,7 @@
 	<div id="article">
 		<!-- header -->
 		<header class='header'>
-			<h1>移动测试网8</h1>
+			<h1>移动测试网89998</h1>
 			<span v-on:sessionName='changeValue' class="usrname" v-if="login_sucess">{{login_name}}</span>
 		</header>
 		<!-- 轮播图 -->

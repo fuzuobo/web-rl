@@ -1,0 +1,242 @@
+#shopcart{
+  position: fixed;
+  left:0px;
+  bottom:-2px;
+  z-index:10;
+  width:100%;
+  height: 58px;
+  background: #191919;
+}
+
+
+.shopcart-content{
+  opacity: 0.9;
+  background: #191919;
+  display: flex;
+  font-size: 12px
+
+}
+
+#shopcart{
+  position: fixed;
+  left:0px;
+  bottom:-2px;
+  z-index:10;
+  width:100%;
+  height: 58px;
+}
+.shopcart-content{
+  opacity: 0.9;
+  background: #191919;
+  display: flex;
+  font-size: 0px
+
+}
+.shopcart-content .left-content{
+  flex:1;
+}
+
+.shopcart-content .right-content{
+  flex: 0 0 105px;
+  width: 105px;
+  background: rgba(0,0,0,0.2);
+}
+
+.shopcart-content .right-content .pay{
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  color:rgba(255,255,255,0.4);
+  line-height: 56px;
+
+}
+
+.logo-wrapper,.shopcart-content .price,.shopcart-content .desc{
+  display: inline-block;
+}
+.logo-wrapper{
+  position: relative;
+  top:-10px;
+  margin: 0px 12px;
+  padding: 6px;
+  width: 56px;
+  height: 56px;
+  box-sizing: border-box;
+  vertical-align: top;
+  border-radius: 50%;
+   background: #141d27
+}
+
+.logo-wrapper .logo{
+  background: #5a5a5a;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  text-align: center;
+  display: inline-block;
+}
+.logo-wrapper .hightlight{
+  background: rgb(0,160,220);
+}
+
+.shopcart-content .hightlight{
+  color:#fff !important;
+}
+
+.logo-wrapper .hightlight .icon-shopping_cart{
+  color:#fff;
+}
+em.num{
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 12px;
+  color: #fff;
+  background: red;
+  font-style: initial;
+  padding: 1px 10px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000
+}
+
+.icon-shopping_cart{
+ font-size: 24px;
+ line-height: 44px;
+ color:#80858a;
+}
+.shopcart-content .price{
+  vertical-align: top;
+  font-size: 24px;
+  margin-top: 22px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-left: 6px;
+  padding-right: 10px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  font-size: 14px;
+  font-weight: 700;color:rgba(255,255,255,0.4);
+}
+
+
+.shopcart-content .desc{
+  vertical-align: top;
+  font-size: 24px;
+  margin-top: 22px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 14px;
+  font-weight: 700;color:rgba(255,255,255,0.4);
+
+}
+
+
+
+
+/*detail*/
+.zz-fixed{
+  position: fixed;
+  width:100%;
+  height: 100%;
+  left:0px;
+  top:0px;
+  bottom:0px;
+  right: 0px;
+  background:rgba(0,0,0,0.6);
+  z-index: -1
+ 
+}
+.shopcartDetail{
+    width: 100%;
+    min-height: 100px;
+    background: #ececec;
+    position: absolute;
+    z-index: 1;
+    bottom: 57px;
+}
+
+
+.shopcartDetail .title{
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid rgba(7,17,27,0.1)
+}
+.shopcartDetail .title .name,.shopcartDetail .title .empty{
+  display: inline-block;
+}
+.shopcartDetail .title .name,.shopcartDetail .title .empty{
+  font-size: 14px;
+  font-weight: 200;
+  color: rgb(139, 140, 140);
+  text-indent: 18px;
+}
+.shopcartDetail .title .name{
+  font-weight: 700
+}
+.shopcartDetail .title .empty{
+  float: right;
+  padding-right: 18px;
+  color: rgb(0,160,220);
+  font-size: 12px;
+}
+
+
+/*css3动画效果*/
+.animate-top-enter-active,.animate-top-leave-active {
+  transition: all 0.5s linear;
+}
+
+.animate-top-enter,.animate-top-leave-active {
+ opacity: 0;
+ transform:translate3d(15px,0,0) rotate(180deg); 
+ /*平移和旋转*/
+}
+
+
+.shopcartDetail .list-shop{
+  padding-bottom: 10px;
+}
+
+
+.shopcartDetail .list-shop li{
+  height: 48px;
+  line-height:48px;
+  background: #fff;
+  padding: 0px 16px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.shopcartDetail .list-shop .shopname,.shopcartDetail .list-shop .price{
+  font-size: 14px;
+  color: rgb(80, 80, 80);
+  display: inline-block;
+}
+.shopcartDetail .list-shop .price{
+    color: red;
+    font-weight: 700;
+    float: right;
+    padding-right: 23%;
+}
+
+#shopcart .carcontrols-wrapper{
+  top:6px;
+  right: 16px
+}
+
+#shopcart .carcontrols-wrapper .cart-count{
+  vertical-align:top;
+  margin-top: 7px
+}
+
+.y{
+ background: #00b43c;
+ color: #fff !important;
+
+}
+
+.cart-decrease,#add .cart-count{
+  vertical-align: bottom;
+}

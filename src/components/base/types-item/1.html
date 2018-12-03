@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="../js/jquery-2.2.3.min.js" type="text/javascript" ></script>
+<div id="wp_paging_w6"> 
+    <ul class="wp_paging clearfix"> 
+         <li class="pages_count"> 
+             <span class="per_page">每页&nbsp;<em class="per_count">14</em>&nbsp;记录&nbsp;</span> 
+             <span class="all_count">总共&nbsp;<em class="all_count">421</em>&nbsp;记录&nbsp;</span> 
+         </li> 
+         <li class="page_nav"> 
+             <a class="first" href="javascript:void(0);" target="_self"><span>第一页</span></a> 
+             <a class="prev" href="javascript:void(0);" target="_self"><span>&lt;&lt;上一页</span></a> 
+             <a class="next" href="/7969/list2.htm" target="_self"><span>下一页&gt;&gt;</span></a> 
+             <a class="last" href="/7969/list31.htm" target="_self"><span>尾页</span></a> 
+         </li> 
+         <li class="page_jump"> 
+             <span class="pages">页码&nbsp;<em class="curr_page">1</em>/<em class="all_pages">31</em></span> 
+             <span><input class="pageNum" type="text"><input type="hidden" class="currPageURL" value=""></span> 
+             <span><a class="pagingJump" href="javascript:void(0);" target="_self">跳转到&nbsp;</a></span> 
+         </li> 
+    </ul> 
+</div>
+
+
+<script type="text/javascript">
+ var articleUrl = "/_wp3services/generalQuery?queryObj=zjuSearch";
+var siteId = 120; //站点Id
+var columnId = $(".col_title").data("col-id"); //多个以英文逗号分隔
+var pageIndex = 1; //从某页开始
+var rows = 14; //每页显示多少篇文章
+loadContents(pageIndex,columnId,siteId,rows);
+
+function loadContents(pageIndex,columnId,siteId,rows){
+    $("#wp_news_w6").find("ul.news_list").children().remove();
+    $("#wp_paging_w6").children().remove();
+    //排序参数
+    var orderData = []; 
+    var returnInfos = JSON.stringify(returnData());
+    var orders = JSON.stringify(orderData); 
+    var conditions = JSON.stringify(conditData());  
+        
+    $.ajax({
+        url: articleUrl,
+        type: 'POST',
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        async: false,
+        dataType: 'json',
+        data: {
+            siteId:siteId,
+            columnId:columnId, 
+            pageIndex:pageIndex, 
+            rows: rows, 
+            orders:orders, 
+            returnInfos: returnInfos, 
+            conditions:conditions,
+            visitPermitFilter:1,
+            checkpm:1
+        },
+        success: function(result){
+            //console.log(result);
+            if (result.data != null){
+                var total = result.total;
+                //console.log(result);
+                for (j=0;j < result.data.length; j++){
+                    var art = result.data[j];
+                    
+                    html =  '<li class="news n1 clearfix">'+
+                            '   <span class="news_title"><a href="'+art.url+'" target="_blank" title="'+art.title+'">'+art.title+'</a></span>'+
+                            '   <span class="news_meta">'+art.publishTime+'</span>'+
+                            '</li>';
+                    $("#wp_news_w6").find("ul.news_list").append(html);     
+                }   
+                var pageCount = result.pageCount;
+                var pageHtml = "";
+                pageHtml += ('<div class="new_pages" >');
+                pageHtml += (' <ul class="wp_paging clearfix"> ');
+                pageHtml += ('   <li class="pages_count"> ');
+                pageHtml += ('     <span class="per_page">每页<em class="per_count">' + rows + '</em>条记录</span> ');
+                pageHtml += ('     <span class="all_count">总共<em class="all_count">' + total + '</em>条记录</span> ');
+                pageHtml += ('   </li> ');
+                pageHtml += ('   <li class="new_page_nav">');
+                pageHtml += ('     <a class="first" href="javascript:void(0);"><span>首页</span></a> ');
+                pageHtml += ('     <a class="prev" href="javascript:void(0);"  ><span>上一页</span></a> ');
+                pageHtml += ('     <a class="next" href="javascript:void(0);" ><span>下一页</span></a> ');
+                pageHtml += ('     <a class="last" href="javascript:void(0);"><span>尾页</span></a> ');
+                pageHtml += ('   </li> ');
+                pageHtml += ('   <li class="new_page_jump"> ');
+                pageHtml += ('     <span class="pages">页码：<em class="curr_page" curr_page="' + pageIndex + '">' + pageIndex + '</em>/<em class="all_pages" pageCount="' + pageCount + '">' + pageCount + '</em></span> ');
+                pageHtml += ('     <span><input class="pageNum" type="text" /><input type="hidden" class="currPageURL" value=""></span></span> ');
+                pageHtml += ('     <span><a class="new_pagingJump" href="javascript:void(0);" target="_self">跳转</a></span> ');
+                pageHtml += ('   </li> ');
+                pageHtml += (' </ul> ');
+                pageHtml += ('</div> ');
+                if(total>0){
+                    $("#wp_paging_w6").html(pageHtml);
+                }
+            }
+        } 
+    });
+}
+
+initpageClick("wp_paging_w6",columnId,siteId,rows); //跳转页面
+initFirstPageClick("wp_paging_w6",columnId,siteId,rows); //首页
+initLastPageClick("wp_paging_w6",columnId,siteId,rows); //尾页
+initPrevPageClick("wp_paging_w6",columnId,siteId,rows); //上一页
+initNextPageClick("wp_paging_w6",columnId,siteId,rows); //下一页
+
+/*查询条件*/
+function conditData(){
+    var conditdata = [
+          //{field: "title", value: val, judge: "like"},
+         // {field: "scope", value: 1, judge: "="}
+    ];
+    return conditdata;
+}
+
+//请求返回参数
+function returnData(){
+    var returnInfosdata = [
+        {field: "title",pattern: [{name: "lp",value: "45"}], name: "title"},
+        {field: "publishTime",pattern: [{name: "d",value: "yyyy-MM-dd"}],name: "publishTime"}
+    ];
+    return returnInfosdata;
+}
+
+//初始化跳转页面
+function initpageClick(idTag,columnId,siteId,rows) {
+    $(document).on('click', "#" + idTag + " .new_pagingJump", function(event) {
+        var pageNum = $(".new_page_jump .pageNum").val();
+        if (pageNum === "") {
+            alert("请输入页码！");
+            return;
+        }
+        var pageCount = $(".new_pages .all_pages").attr("pageCount");
+        if (isNaN(pageNum) || pageNum <= 0 || pageNum > pageCount) {
+            alert("请输入正确页码！");
+            return;
+        }
+        loadContents(pageNum,columnId,siteId,rows);
+    });
+}
+//初始化首页
+function initFirstPageClick(idTag,columnId,siteId,rows) {
+    $(document).on('click', "#" + idTag + " .new_page_nav .first", function(event) {
+        loadContents(1,columnId,siteId,rows);
+    });
+}
+//初始化尾页
+function initLastPageClick(idTag,columnId,siteId,rows) {
+    $(document).on('click', "#" + idTag + " .new_page_nav .last", function(event) {
+        var allPages = $(".new_pages .all_pages").attr("pageCount");
+        loadContents(allPages,columnId,siteId,rows);
+    });
+}
+//初始化上一页
+function initPrevPageClick(idTag,columnId,siteId,rows) {
+    $(document).on('click', "#" + idTag + " .new_page_nav .prev", function(event) {
+        var pageCount = $(".new_page_jump .curr_page").attr("curr_page");
+        var prev = --pageCount;
+        if (prev <= 0) {
+            return;
+        }
+        loadContents(prev,columnId,siteId,rows);
+    });
+}
+//初始化下一页
+function initNextPageClick(idTag,columnId,siteId,rows) {
+    $(document).on('click', "#" + idTag + " .new_page_nav .next", function(event) {
+        var pageCount = $(".new_page_jump .curr_page").attr("curr_page");
+        //alert(pageCount);
+        var next = ++pageCount;
+        var allPages = $(".new_pages .all_pages").attr("pageCount");
+        if (allPages < next) {
+            return;
+        }
+        loadContents(next,columnId,siteId,rows);
+    });
+}
+</script>
+
+</body>
+</html>

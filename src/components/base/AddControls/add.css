@@ -1,0 +1,49 @@
+/*css3动画效果*/
+.fade-enter-active,.fade-leave-active {
+    transition: all 1s linear;
+}
+
+.fade-enter,.fade-leave-active {
+   opacity: 0;
+   transform:translate3d(25px,0,0) rotate(180deg); 
+   /*平移和旋转*/
+}
+
+#add .cart-decrease,#add .cart-count,#add .cart-add{
+   display: inline-block;
+   font-size:24px;
+   line-height: 20px;
+   color:#fff;
+   padding:0px;
+   transition: all 0.3s linear;
+   background: rgb(0,160,240);
+   width:20px;
+   height:20px;
+   border-radius: 20px;
+   text-align: center;
+}
+#add .cart-decrease{
+line-height: 16px;
+}
+
+#add .cart-add{
+   vertical-align: bottom;
+}
+
+#add .cart-decrease span.inner{
+  font-size:24px;
+  line-height: 24px;
+  color:rgb(0,160,240);
+}
+
+#add .cart-count{
+  vertical-align: top;
+  font-size:12px;
+  width: 14px;
+  line-height: 24px;
+  text-align: center;
+  color:rgb(137,152,159);
+  background: #fff;
+  border-radius:0px;
+}
+

@@ -135,3 +135,13 @@ html,body{
   	color:#666;
   }
 
+
+.test .aa{
+	font-weight: 600;
+	line-height: 40px
+
+}
+
+.test .bb{
+	color:red;
+}
